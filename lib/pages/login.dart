@@ -1,3 +1,4 @@
+import 'package:app_eventos/services/google-sign-in.dart';
 import 'package:flutter/material.dart';
 
 class login extends StatelessWidget {
@@ -5,6 +6,15 @@ class login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Center(
+        child: IconButton(
+          icon: Icon(Icons.gif_box),
+          onPressed: () async{
+            await iniciarSesionConGoogle();
+          },
+          ),
+      ),
+    );
   }
 }

@@ -1,6 +1,5 @@
-import 'package:app_eventos/services/google-sign-in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class home extends StatelessWidget {
   const home({super.key});
@@ -9,14 +8,16 @@ class home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hola mundo'),
-      ),
-      body: Container(
-        child: IconButton(
-          onPressed: () async{
-            await signInWithGoogle();
-          },
-          icon: Icon(Icons.add_box)),
+        title: Text(FirebaseAuth.instance.currentUser!.displayName!),
+        leading: Image(image: NetworkImage(FirebaseAuth.instance.currentUser!.photoURL!)),
+        actions: [
+          PopupMenuButton(
+            itemBuilder: (context) => [PopupMenuItem(child: Text('Cerrar Sesión'), value: 'logout')],
+            onSelected: (opcion) {
+              FirebaseAuth.instance.signOut();
+            },
+          ),
+        ],
       ),
     );
   }
