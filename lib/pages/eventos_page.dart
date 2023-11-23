@@ -18,26 +18,32 @@ class _EventosPageState extends State<EventosPage> {
           stream: FirebaseFirestore.instance.collection('eventos').snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator(); // Muestra un indicador de carga mientras se obtienen los datos
+              return CircularProgressIndicator();
             }
 
             if (snapshot.hasError) {
-              return Text('Error al obtener los datos'); // Maneja los errores de obtención de datos
+              return Text('Error al obtener los datos');
             }
 
-            // Si hay datos disponibles, muestra la lista
             if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
               return ListView.builder(
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   var data = snapshot.data!.docs[index].data() as Map<String, dynamic>;
-                  // Aquí puedes personalizar cómo se muestra cada elemento de la lista
-                  return eventos_widget(nombre: nombre, fecha: fecha, hora: hora, lugar: lugar, descripcion: descripcion, tipo: tipo, imageUrl: imageUrl,)
+                  
+                  return eventos_widget(
+                    nombre: data['nombre'], 
+                    fechaHora: data['fechaHora'], 
+                    lugar: data['nombre'], 
+                    descripcion: data['nombre'], 
+                    tipo: data['nombre'], 
+                    estado : data['nombre'],
+                    likes : data['nombre'],
+                    imageUrl: data['nombre']);
                 },
               );
             }
 
-            // Si no hay datos, muestra un mensaje indicando que no hay elementos
             return Text('No hay datos disponibles');
           },
         ),
