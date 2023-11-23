@@ -1,11 +1,10 @@
+import 'package:app_eventos/pages/agregarEventoPage.dart';
 import 'package:app_eventos/pages/homePage.dart';
 import 'package:app_eventos/pages/loginPage.dart';
 import 'package:app_eventos/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:provider/provider.dart';
 
 class Index extends StatefulWidget {
   const Index({super.key});
@@ -26,6 +25,9 @@ class _homeState extends State<Index> {
         break;
       case 2:
         paginaActual = LoginPage();
+        break;
+      case 3:
+        paginaActual = AgregarEventoPage();
         break;
     }
     Navigator.pop(context);
@@ -67,6 +69,16 @@ class _homeState extends State<Index> {
                       title: Text('Iniciar Sesion como Administrador'),
                       onTap: () {
                         destino = 2;
+                        navegar(context, destino);
+                      },
+                    ),
+                  ),
+                  Divider(),
+                  Container(
+                    child: ListTile(
+                      title: Text('Agregar Evento'),
+                      onTap: () {
+                        destino = 3;
                         navegar(context, destino);
                       },
                     ),

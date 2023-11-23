@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class eventos_widget extends StatefulWidget {
+class eventos_widget extends StatelessWidget {
   const eventos_widget({
     required this.nombre,
     required this.fecha,
@@ -8,29 +8,61 @@ class eventos_widget extends StatefulWidget {
     required this.lugar,
     required this.descripcion,
     required this.tipo,
-    required this.likes,
   });
-
+  
   final String nombre;
   final DateTime fecha;
-  final String hora;
+  final TimeOfDay hora;
   final String lugar;
   final String descripcion;
   final String tipo;
-  final int likes;
+  final int likes = 0;
 
-  @override
-  State<eventos_widget> createState() => _eventos_widgetState();
-}
-
-class _eventos_widgetState extends State<eventos_widget> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          
-      ]),
+    return Card(
+      elevation: 4,
+      margin: EdgeInsets.all(8),
+      child: Padding(
+        padding: EdgeInsets.all(8),
+        child: Row(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  nombre,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+                SizedBox(height: 8),
+                Text('Fecha: ${fecha.day}/${fecha.month}/${fecha.year}'),
+                Text('Hora: ${hora.hour}:${hora.minute}'),
+                Text('Lugar: $lugar'),
+                Text('Tipo: $tipo'),
+                SizedBox(height: 8),
+                Text(
+                  'Descripción:',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(descripcion),
+                SizedBox(height: 8),
+                Row(
+                  children: [
+                    Icon(Icons.thumb_up),
+                    SizedBox(width: 4),
+                    Text('$likes likes'),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
