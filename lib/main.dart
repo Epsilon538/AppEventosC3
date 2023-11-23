@@ -1,4 +1,4 @@
-import 'package:app_eventos/pages/index.dart';
+import 'package:app_eventos/pages/home_page.dart';
 import 'package:app_eventos/services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,15 +21,13 @@ class MyApp extends StatelessWidget {
       initialData: null,
       value: AuthService().usuario,
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: Index()
-      ),
+          debugShowCheckedModeBanner: false,
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+            useMaterial3: true,
+          ),
+          home: HomePage()),
     );
   }
 }
-

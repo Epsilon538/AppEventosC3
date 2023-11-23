@@ -8,6 +8,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -18,8 +19,9 @@ class LoginPage extends StatelessWidget {
                 Text('Iniciar Sesion'),
                 IconButton(
                   icon: Icon(MdiIcons.google),
-                  onPressed: () async{
+                  onPressed: () async {
                     await iniciarSesionConGoogle();
+                    Navigator.pop(context);
                   },
                 ),
               ],
