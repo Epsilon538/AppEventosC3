@@ -1,7 +1,7 @@
 import 'dart:io';
-
 import 'package:app_eventos/services/firestore_service.dart';
 import 'package:app_eventos/services/select_image.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -31,10 +31,11 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
     return formatter.format(dateTime);
   }
 
+    File? imageSubir;
+
   @override
   Widget build(BuildContext context) {
 
-    File? imageSubir;
     
     String formattedTime = formatTimeOfDay(horaEvento);
 
@@ -172,16 +173,49 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 45, 184, 27)
                         ),
-                      onPressed: () {
-                        if (formKey.currentState!.validate()) {
+                      onPressed: () async{
+                        if(formKey.currentState!.validate()) {
+                          if(imageSubir != null) {
+
+                            String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+                                
+                            firebase_storage.Reference storageReference = firebase_storage.FirebaseStorage.instance.ref().child(fileName);
+                                    
+                            firebase_storage.UploadTask uploadTask = storageReference.putFile(File(imageSubir!.path));
+                                
+                            await uploadTask;
+                            
+                            String imageUrl =
+                                await storageReference.getDownloadURL();
+
                             FirestoreService().eventoAgregar(
-                              nombreController.text.trim(),
-                              guardarFechaHora(),
-                              lugarController.text.trim(),
-                              descripcionController.text.trim(),
-                              tipoController.text.trim(),
-                              imageSubir!,
+                                nombreController.text,
+                                guardarFechaHora(),
+                                lugarController.text,
+                                descripcionController.text,
+                                tipoController.text,
+                                imageUrl,
                             );
+                          } else {
+                            showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Text('Imagen no encontrada'),
+                                content: Text("Selecciona una imagen"),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.pop(
+                                          context); // Cerrar la alerta
+                                    },
+                                    child: Text('Aceptar'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                          }
                         }
                       },
                       child: Text('Enviar', style: TextStyle(color: Colors.black)),

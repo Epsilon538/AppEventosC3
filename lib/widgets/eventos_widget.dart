@@ -8,6 +8,7 @@ class eventos_widget extends StatelessWidget {
     required this.lugar,
     required this.descripcion,
     required this.tipo,
+    required this.imageUrl,
   });
   
   final String nombre;
@@ -16,6 +17,7 @@ class eventos_widget extends StatelessWidget {
   final String lugar;
   final String descripcion;
   final String tipo;
+  final String imageUrl;
   final int likes = 0;
 
   @override
@@ -60,6 +62,9 @@ class eventos_widget extends StatelessWidget {
                 ),
               ],
             ),
+            Container(
+              child: Image(image: NetworkImage('$imageUrl')),
+            )
           ],
         ),
       ),

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirestoreService {
@@ -7,7 +5,7 @@ class FirestoreService {
     return FirebaseFirestore.instance.collection('eventos').snapshots();
   }
 
-  Future<void> eventoAgregar(String nombre, DateTime fechaHora, String lugar, String descripcion, String tipo, File imagen) async {
+  Future<void> eventoAgregar(String nombre, DateTime fechaHora, String lugar, String descripcion, String tipo, String imagen) async {
     return FirebaseFirestore.instance.collection('eventos').doc().set({
       'nombre': nombre,
       'fechaHora' : fechaHora,
@@ -18,7 +16,7 @@ class FirestoreService {
     });
   }
 
-  Future<void> estudianteBorrar(String docId) async {
+  Future<void> eventoBorrar(String docId) async {
     return FirebaseFirestore.instance.collection('eventos').doc(docId).delete();
   }
 
