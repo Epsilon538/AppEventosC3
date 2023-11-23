@@ -1,3 +1,4 @@
+import 'package:app_eventos/pages/agregar_evento_page.dart';
 import 'package:app_eventos/pages/eventos_page.dart';
 import 'package:app_eventos/pages/finalizados_page.dart';
 import 'package:app_eventos/pages/login_page.dart';
@@ -19,6 +20,12 @@ class _HomePageState extends State<HomePage> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+            child: Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AgregarEventoPage()));
+            }),
         appBar: AppBar(
           actions: [
             StreamBuilder(
