@@ -31,6 +31,7 @@ class _EventosPageState extends State<EventosPage> {
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   Evento evento = Evento.fromSnapshot(snapshot.data!.docs[index]);
+                  print(evento.imagen);
                   return eventos_widget(
                     nombre: evento.nombre, 
                     fechaHora: evento.fechaHora, 
@@ -43,6 +44,7 @@ class _EventosPageState extends State<EventosPage> {
                 },
               );
             }
+            
 
             return Text('No hay datos disponibles');
           },
