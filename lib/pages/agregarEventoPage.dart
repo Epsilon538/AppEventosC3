@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:app_eventos/pages/homePage.dart';
 import 'package:app_eventos/services/firestore_service.dart';
 import 'package:app_eventos/services/select_image.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -131,7 +132,7 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
                           showDatePicker(
                             context: context,
                             initialDate: DateTime.now(),
-                            firstDate: DateTime(2020),
+                            firstDate: DateTime.now(),
                             lastDate: DateTime(2100),
                           ).then((fecha) {
                             setState(() {
@@ -196,6 +197,8 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
                                 tipoController.text,
                                 imageUrl,
                             );
+                            Navigator.pop(context);
+                            Navigator.push(context, MaterialPageRoute(builder: ((context) => HomePage())));
                           } else {
                             showDialog(
                             context: context,
