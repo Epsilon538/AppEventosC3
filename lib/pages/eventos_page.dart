@@ -1,3 +1,4 @@
+import 'package:app_eventos/models/evento.dart';
 import 'package:app_eventos/widgets/eventos_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -29,17 +30,16 @@ class _EventosPageState extends State<EventosPage> {
               return ListView.builder(
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
-                  var data = snapshot.data!.docs[index].data() as Map<String, dynamic>;
-                  
+                  Evento evento = Evento.fromSnapshot(snapshot.data!.docs[index]);
                   return eventos_widget(
-                    nombre: data['nombre'], 
-                    fechaHora: data['fechaHora'], 
-                    lugar: data['nombre'], 
-                    descripcion: data['nombre'], 
-                    tipo: data['nombre'], 
-                    estado : data['nombre'],
-                    likes : data['nombre'],
-                    imageUrl: data['nombre']);
+                    nombre: evento.nombre, 
+                    fechaHora: evento.fechaHora, 
+                    lugar: evento.lugar, 
+                    descripcion: evento.desc, 
+                    tipo: evento.tipo, 
+                    estado : evento.estado,
+                    likes : evento.likes,
+                    imageUrl: evento.imagen);
                 },
               );
             }

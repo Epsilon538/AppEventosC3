@@ -3,22 +3,23 @@ import 'package:flutter/material.dart';
 class eventos_widget extends StatelessWidget {
   const eventos_widget({
     required this.nombre,
-    required this.fecha,
-    required this.hora,
+    required this.fechaHora,
     required this.lugar,
     required this.descripcion,
     required this.tipo,
+    required this.estado,
+    required this.likes,
     required this.imageUrl,
   });
   
   final String nombre;
-  final DateTime fecha;
-  final TimeOfDay hora;
+  final DateTime fechaHora;
   final String lugar;
   final String descripcion;
   final String tipo;
+  final String estado;
+  final int likes;
   final String imageUrl;
-  final int likes = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +42,8 @@ class eventos_widget extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 8),
-                Text('Fecha: ${fecha.day}/${fecha.month}/${fecha.year}'),
-                Text('Hora: ${hora.hour}:${hora.minute}'),
+                Text('Fecha: ${fechaHora.day}/${fechaHora.month}/${fechaHora.year}'),
+                Text('Hora: ${fechaHora.hour}:${fechaHora.minute}'),
                 Text('Lugar: $lugar'),
                 SizedBox(height: 8),
                 SizedBox(height: 8),
