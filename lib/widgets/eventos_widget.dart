@@ -28,9 +28,10 @@ class eventos_widget extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.all(8),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   nombre,
@@ -43,15 +44,7 @@ class eventos_widget extends StatelessWidget {
                 Text('Fecha: ${fecha.day}/${fecha.month}/${fecha.year}'),
                 Text('Hora: ${hora.hour}:${hora.minute}'),
                 Text('Lugar: $lugar'),
-                Text('Tipo: $tipo'),
                 SizedBox(height: 8),
-                Text(
-                  'Descripción:',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(descripcion),
                 SizedBox(height: 8),
                 Row(
                   children: [
@@ -62,12 +55,24 @@ class eventos_widget extends StatelessWidget {
                 ),
               ],
             ),
-            Container(
-              child: Image(image: NetworkImage('$imageUrl')),
-            )
+              Center(
+                child: Container(
+                  width: 200,
+                  height: 200,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8)
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Image(image: NetworkImage('$imageUrl'),
+                      fit: BoxFit.cover),
+                    ),
+                ),
+              ),
           ],
         ),
       ),
     );
   }
 }
+
