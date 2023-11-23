@@ -33,7 +33,7 @@ class Evento {
         _estado = snapshot['estado'],
         _likes = snapshot['likes'],
         _imagen = snapshot['imagen'],
-        _fechaHora = snapshot['fechaHora'];
+        _fechaHora = snapshot['fechaHora'].toDate();
 
   String get nombre => this._nombre;
   DateTime get fechaHora => this._fechaHora;
