@@ -25,7 +25,8 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
 
   String formatTimeOfDay(TimeOfDay time) {
     final now = DateTime.now();
-    final dateTime = DateTime(now.year, now.month, now.day, time.hour, time.minute);
+    final dateTime =
+        DateTime(now.year, now.month, now.day, time.hour, time.minute);
     final formatter = DateFormat.jm();
     return formatter.format(dateTime);
   }
@@ -197,7 +198,6 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
                                     lugarController.text,
                                     descripcionController.text,
                                     tipoController.text,
-                                    'Sin comenzar',
                                     imageUrl,
                                   );
                                 } else {
