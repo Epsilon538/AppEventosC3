@@ -33,7 +33,8 @@ class _ProximosPageState extends State<ProximosPage> {
                   Evento evento =
                       Evento.fromSnapshot(snapshot.data!.docs[index]);
                   if (evento.fechaHora
-                      .isBefore(DateTime.now().add(Duration(days: 3))))
+                          .isBefore(DateTime.now().add(Duration(days: 3))) &&
+                      evento.estado == 'Pendiente')
                     return eventos_widget(
                         nombre: evento.nombre,
                         fechaHora: evento.fechaHora,

@@ -27,7 +27,7 @@ class FinalizadosPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   Evento evento =
                       Evento.fromSnapshot(snapshot.data!.docs[index]);
-                  if (evento.fechaHora.isBefore(DateTime.now()))
+                  if (evento.estado != 'Pendiente')
                     return eventos_widget(
                         nombre: evento.nombre,
                         fechaHora: evento.fechaHora,

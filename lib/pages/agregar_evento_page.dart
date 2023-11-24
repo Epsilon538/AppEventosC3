@@ -195,7 +195,7 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
                                     lugarController.text,
                                     descripcionController.text,
                                     tipoController.text,
-                                    'Sin comenzar',
+                                    'Pendiente',
                                     0,
                                     imageUrl,
                                   );
