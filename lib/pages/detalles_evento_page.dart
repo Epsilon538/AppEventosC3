@@ -49,13 +49,20 @@ class detallesEvento extends StatelessWidget {
                         ),
                       ),
                       Container(
+                        padding: EdgeInsets.only(top: 15),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(evento.nombre)
+                            Text('Nombre: ' + evento.nombre, style: TextStyle(fontSize: 20)),
+                            Text('Lugar: ' + evento.lugar, style: TextStyle(fontSize: 20)),
+                            Text('Fecha: ' + evento.fechaHora.day.toString()+'/'+evento.fechaHora.month.toString()+'/'+evento.fechaHora.year.toString(), style: TextStyle(fontSize: 20)),
+                            Text('Hora: ' + evento.fechaHora.hour.toString().padLeft(2, '0')+':'+evento.fechaHora.minute.toString().padLeft(2,'0'), style: TextStyle(fontSize: 20)),
+                            Text('Tipo: ' + evento.tipo, style: TextStyle(fontSize: 20)),
+                            Text('Me gusta: ' + evento.likes.toString(), style: TextStyle(fontSize: 20)),
+                            Text('Descripcion: ' + evento.desc, style: TextStyle(fontSize: 20)),
                           ],
                         ),
-                      ),
-                      IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(MdiIcons.console))                    
+                      ),                 
                     ],
                   );
                 },

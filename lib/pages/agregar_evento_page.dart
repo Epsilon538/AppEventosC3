@@ -244,7 +244,7 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
                               if (imagen == null) {
                                 print('tonto');
                               } else {
-                                imageSubir = File(imagen!.path);
+                                imageSubir = File(imagen.path);
                               }
                             });
                           },
