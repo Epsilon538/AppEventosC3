@@ -30,15 +30,15 @@ class FirestoreService {
     return FirebaseFirestore.instance.collection('eventos').doc(id).delete();
   }
 
-  Future<QuerySnapshot> getEventos() async {
-    return FirebaseFirestore.instance.collection('eventos').get();
-  }
-
   void actualizarLike(String id, int like) async {
       DocumentReference documentReference = FirebaseFirestore.instance.collection('eventos').doc(id);
       await documentReference.update({
         'likes' : like
       });
+  }
+
+  Stream<QuerySnapshot> getEventoUnico(String id) {
+    return FirebaseFirestore.instance.collection('eventos').where('id', isEqualTo: id).snapshots();
   }
 
 }

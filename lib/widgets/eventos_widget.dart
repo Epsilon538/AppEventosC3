@@ -53,8 +53,7 @@ class eventos_widget extends StatelessWidget {
                           fontSize: 18,
                         ),
                       ),
-                      Text(
-                          'Fecha: ${fechaHora.day}/${fechaHora.month}/${fechaHora.year}'),
+                      Text('Fecha: ${fechaHora.day}/${fechaHora.month}/${fechaHora.year}'),
                       Text('Hora: ${fechaHora.hour}:${fechaHora.minute}'),
                       Text('Lugar: $lugar'),
                       Text('Estado: $estado'),
@@ -81,7 +80,7 @@ class eventos_widget extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => detallesEvento()));
+                                      builder: (context) => detallesEvento(id: id)));
                             },
                           ),
                           StreamBuilder(
