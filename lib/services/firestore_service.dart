@@ -5,6 +5,10 @@ class FirestoreService {
     return FirebaseFirestore.instance.collection('eventos').snapshots();
   }
 
+  Stream<DocumentSnapshot> eventoUnico(String id) {
+    return FirebaseFirestore.instance.collection('eventos').doc(id).snapshots();
+  }
+
   Future<void> eventoAgregar(
       String nombre,
       DateTime fechaHora,
@@ -35,10 +39,6 @@ class FirestoreService {
       await documentReference.update({
         'likes' : like
       });
-  }
-
-  Stream<QuerySnapshot> getEventoUnico(String id) {
-    return FirebaseFirestore.instance.collection('eventos').where('id', isEqualTo: id).snapshots();
   }
 
 }

@@ -4,26 +4,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class detallesEvento extends StatefulWidget {
+class detallesEvento extends StatelessWidget {
   detallesEvento({required this.id});
 
-  String id;
+  final String id;
 
-  @override
-  State<detallesEvento> createState() => _detallesEventoState();
-}
-
-class _detallesEventoState extends State<detallesEvento> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: Card(
-        child: StreamBuilder<QuerySnapshot>(
-          stream: FirestoreService().eventos(),
+        child: StreamBuilder<DocumentSnapshot>(
+          stream: FirestoreService().eventoUnico(id),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              print(widget.id);
+              print(id);
               return CircularProgressIndicator();
             }
 
@@ -31,13 +26,12 @@ class _detallesEventoState extends State<detallesEvento> {
               return Text('Error al obtener los datos');
             }
 
-            if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
+            if (snapshot.hasData && snapshot.data!.exists) {
               return ListView.builder(
-                itemCount: snapshot.data!.docs.length,
+                itemCount: 1,
                 itemBuilder: (context, index) {
-                  Evento evento = Evento.fromSnapshot(snapshot.data!.docs[index]);
+                  Evento evento = Evento.fromSnapshot(snapshot.data!);
                   print('evento ${evento.id}');
-                  while (evento.id == widget.id){
                     return Column(
                     children: [
                       Center(
@@ -64,7 +58,6 @@ class _detallesEventoState extends State<detallesEvento> {
                       IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(MdiIcons.console))                    
                     ],
                   );
-                  }
                 },
               );
             }
