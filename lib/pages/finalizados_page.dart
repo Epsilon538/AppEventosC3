@@ -11,7 +11,10 @@ class FinalizadosPage extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection('eventos').snapshots(),
+          stream: FirebaseFirestore.instance
+              .collection('eventos')
+              .where('estado', isNotEqualTo: 'Pendiente')
+              .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();
@@ -27,17 +30,16 @@ class FinalizadosPage extends StatelessWidget {
                 itemBuilder: (context, index) {
                   Evento evento =
                       Evento.fromSnapshot(snapshot.data!.docs[index]);
-                  if (evento.estado != 'Pendiente')
-                    return eventos_widget(
-                        nombre: evento.nombre,
-                        fechaHora: evento.fechaHora,
-                        lugar: evento.lugar,
-                        descripcion: evento.desc,
-                        tipo: evento.tipo,
-                        estado: evento.estado,
-                        likes: evento.likes,
-                        imageUrl: evento.imagen,
-                        id: evento.id);
+                  return eventos_widget(
+                      nombre: evento.nombre,
+                      fechaHora: evento.fechaHora,
+                      lugar: evento.lugar,
+                      descripcion: evento.desc,
+                      tipo: evento.tipo,
+                      estado: evento.estado,
+                      likes: evento.likes,
+                      imageUrl: evento.imagen,
+                      id: evento.id);
                 },
               );
             }

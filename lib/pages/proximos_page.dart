@@ -16,7 +16,10 @@ class _ProximosPageState extends State<ProximosPage> {
     return Scaffold(
       body: Center(
         child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance.collection('eventos').snapshots(),
+          stream: FirebaseFirestore.instance
+              .collection('eventos')
+              .where('estado', isEqualTo: 'Pendiente')
+              .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();
@@ -33,8 +36,7 @@ class _ProximosPageState extends State<ProximosPage> {
                   Evento evento =
                       Evento.fromSnapshot(snapshot.data!.docs[index]);
                   if (evento.fechaHora
-                          .isBefore(DateTime.now().add(Duration(days: 3))) &&
-                      evento.estado == 'Pendiente')
+                      .isBefore(DateTime.now().add(Duration(days: 3))))
                     return eventos_widget(
                         nombre: evento.nombre,
                         fechaHora: evento.fechaHora,
