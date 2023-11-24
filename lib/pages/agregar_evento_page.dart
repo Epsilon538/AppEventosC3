@@ -238,9 +238,14 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
                             ],
                           ),
                           onPressed: () async {
-                            final XFile? imagen = await getImage();
+                            final XFile? imagen =
+                                await getImage(); //Esta wea esta hecha como el pico XJDSFUSFKO´Ñ
                             setState(() {
-                              imageSubir = File(imagen!.path);
+                              if (imagen == null) {
+                                print('tonto');
+                              } else {
+                                imageSubir = File(imagen!.path);
+                              }
                             });
                           },
                         ))
