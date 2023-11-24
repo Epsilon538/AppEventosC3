@@ -36,15 +36,8 @@ class _EventosPageState extends State<EventosPage> {
                   Evento evento =
                       Evento.fromSnapshot(snapshot.data!.docs[index]);
                   return eventos_widget(
-                      nombre: evento.nombre,
-                      fechaHora: evento.fechaHora,
-                      lugar: evento.lugar,
-                      descripcion: evento.desc,
-                      tipo: evento.tipo,
-                      estado: evento.estado,
-                      likes: evento.likes,
-                      imageUrl: evento.imagen,
-                      id: evento.id);
+                    evento: evento,
+                  );
                 },
               );
             }
