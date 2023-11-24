@@ -34,6 +34,7 @@ class eventos_widget extends StatefulWidget {
 
 class _eventos_widgetState extends State<eventos_widget> {
   bool estadoLike = true;
+  Color colorLike = Colors.black87;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -68,18 +69,20 @@ class _eventos_widgetState extends State<eventos_widget> {
                       Row(
                         children: [
                           IconButton(
-                            icon: Icon(Icons.thumb_up),
+                            icon: Icon(Icons.thumb_up, color: colorLike),
                             onPressed: () {
                               if (estadoLike == true) {
                                 int nuevoLike = widget.likes + 1;
                                 FirestoreService()
                                     .actualizarLike(widget.id, nuevoLike);
                                 estadoLike = false;
+                                colorLike = Colors.lightGreen;
                               } else {
                                 int nuevoLike = widget.likes - 1;
                                 FirestoreService()
                                     .actualizarLike(widget.id, nuevoLike);
                                 estadoLike = true;
+                                colorLike = Colors.black87;
                               }
                             },
                           ),
