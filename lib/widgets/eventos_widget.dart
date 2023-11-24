@@ -53,8 +53,10 @@ class eventos_widget extends StatelessWidget {
                           fontSize: 18,
                         ),
                       ),
-                      Text('Fecha: ${fechaHora.day}/${fechaHora.month}/${fechaHora.year}'),
-                      Text('Hora: ${fechaHora.hour}:${fechaHora.minute}'),
+                      Text(
+                          'Fecha: ${fechaHora.day}/${fechaHora.month}/${fechaHora.year}'),
+                      Text(
+                          'Hora: ${fechaHora.hour.toString().padLeft(2, '0')}:${fechaHora.minute.toString().padLeft(2, '0')}'),
                       Text('Lugar: $lugar'),
                       Text('Estado: $estado'),
                       Text('Me gusta: $likes'),
@@ -63,13 +65,15 @@ class eventos_widget extends StatelessWidget {
                           IconButton(
                             icon: Icon(Icons.thumb_up),
                             onPressed: () {
-                              if(estadoLike == true) {
+                              if (estadoLike == true) {
                                 int nuevoLike = likes + 1;
-                                FirestoreService().actualizarLike(id, nuevoLike);
+                                FirestoreService()
+                                    .actualizarLike(id, nuevoLike);
                                 estadoLike = false;
                               } else {
                                 int nuevoLike = likes - 1;
-                                FirestoreService().actualizarLike(id, nuevoLike);
+                                FirestoreService()
+                                    .actualizarLike(id, nuevoLike);
                                 estadoLike = true;
                               }
                             },
@@ -80,7 +84,8 @@ class eventos_widget extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => detallesEvento(id: id)));
+                                      builder: (context) =>
+                                          detallesEvento(id: id)));
                             },
                           ),
                           StreamBuilder(
