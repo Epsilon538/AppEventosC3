@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class eventos_widget extends StatelessWidget {
+class eventos_widget extends StatefulWidget {
   const eventos_widget({
     required this.nombre,
     required this.fechaHora,
@@ -29,8 +29,13 @@ class eventos_widget extends StatelessWidget {
   final String id;
 
   @override
+  State<eventos_widget> createState() => _eventos_widgetState();
+}
+
+class _eventos_widgetState extends State<eventos_widget> {
+  bool estadoLike = true;
+  @override
   Widget build(BuildContext context) {
-    bool estadoLike = true;
     return Card(
       elevation: 4,
       margin: EdgeInsets.all(15),
@@ -47,33 +52,33 @@ class eventos_widget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        nombre,
+                        widget.nombre,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
                       ),
                       Text(
-                          'Fecha: ${fechaHora.day}/${fechaHora.month}/${fechaHora.year}'),
+                          'Fecha: ${widget.fechaHora.day}/${widget.fechaHora.month}/${widget.fechaHora.year}'),
                       Text(
-                          'Hora: ${fechaHora.hour.toString().padLeft(2, '0')}:${fechaHora.minute.toString().padLeft(2, '0')}'),
-                      Text('Lugar: $lugar'),
-                      Text('Estado: $estado'),
-                      Text('Me gusta: $likes'),
+                          'Hora: ${widget.fechaHora.hour.toString().padLeft(2, '0')}:${widget.fechaHora.minute.toString().padLeft(2, '0')}'),
+                      Text('Lugar: ${widget.lugar}'),
+                      Text('Estado: ${widget.estado}'),
+                      Text('Me gusta: ${widget.likes}'),
                       Row(
                         children: [
                           IconButton(
                             icon: Icon(Icons.thumb_up),
                             onPressed: () {
                               if (estadoLike == true) {
-                                int nuevoLike = likes + 1;
+                                int nuevoLike = widget.likes + 1;
                                 FirestoreService()
-                                    .actualizarLike(id, nuevoLike);
+                                    .actualizarLike(widget.id, nuevoLike);
                                 estadoLike = false;
                               } else {
-                                int nuevoLike = likes - 1;
+                                int nuevoLike = widget.likes - 1;
                                 FirestoreService()
-                                    .actualizarLike(id, nuevoLike);
+                                    .actualizarLike(widget.id, nuevoLike);
                                 estadoLike = true;
                               }
                             },
@@ -85,7 +90,7 @@ class eventos_widget extends StatelessWidget {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          detallesEvento(id: id)));
+                                          detallesEvento(id: widget.id)));
                             },
                           ),
                           StreamBuilder(
@@ -98,7 +103,8 @@ class eventos_widget extends StatelessWidget {
                                 return IconButton(
                                     icon: Icon(MdiIcons.trashCan),
                                     onPressed: () async {
-                                      await FirestoreService().eventoBorrar(id);
+                                      await FirestoreService()
+                                          .eventoBorrar(widget.id);
                                     });
                               } else {
                                 return Container();
@@ -115,7 +121,8 @@ class eventos_widget extends StatelessWidget {
                                 return IconButton(
                                     icon: Icon(MdiIcons.cog),
                                     onPressed: () async {
-                                      await FirestoreService().eventoBorrar(id);
+                                      await FirestoreService()
+                                          .eventoBorrar(widget.id);
                                     });
                               } else {
                                 return Container();
@@ -138,7 +145,8 @@ class eventos_widget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image(
-                      image: NetworkImage('$imageUrl'), fit: BoxFit.cover),
+                      image: NetworkImage('${widget.imageUrl}'),
+                      fit: BoxFit.cover),
                 ),
               ),
             ),
