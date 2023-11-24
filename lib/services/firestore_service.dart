@@ -33,4 +33,12 @@ class FirestoreService {
   Future<QuerySnapshot> getEventos() async {
     return FirebaseFirestore.instance.collection('eventos').get();
   }
+
+  void actualizarLike(String id, int like) async {
+      DocumentReference documentReference = FirebaseFirestore.instance.collection('eventos').doc(id);
+      await documentReference.update({
+        'likes' : like
+      });
+  }
+
 }

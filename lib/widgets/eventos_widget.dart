@@ -30,6 +30,7 @@ class eventos_widget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool estadoLike = true;
     return Card(
       elevation: 4,
       margin: EdgeInsets.all(15),
@@ -56,16 +57,22 @@ class eventos_widget extends StatelessWidget {
                           'Fecha: ${fechaHora.day}/${fechaHora.month}/${fechaHora.year}'),
                       Text('Hora: ${fechaHora.hour}:${fechaHora.minute}'),
                       Text('Lugar: $lugar'),
-                      Text('$likes Me gusta'),
+                      Text('Estado: $estado'),
+                      Text('Me gusta: $likes'),
                       Row(
                         children: [
                           IconButton(
                             icon: Icon(Icons.thumb_up),
                             onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => detallesEvento()));
+                              if(estadoLike == true) {
+                                int nuevoLike = likes + 1;
+                                FirestoreService().actualizarLike(id, nuevoLike);
+                                estadoLike = false;
+                              } else {
+                                int nuevoLike = likes - 1;
+                                FirestoreService().actualizarLike(id, nuevoLike);
+                                estadoLike = true;
+                              }
                             },
                           ),
                           IconButton(
