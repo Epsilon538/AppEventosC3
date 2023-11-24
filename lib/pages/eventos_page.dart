@@ -1,5 +1,4 @@
 import 'package:app_eventos/models/evento.dart';
-import 'package:app_eventos/services/firestore_service.dart';
 import 'package:app_eventos/widgets/eventos_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,10 @@ class _EventosPageState extends State<EventosPage> {
     return Scaffold(
       body: Center(
         child: StreamBuilder<QuerySnapshot>(
-          stream: FirestoreService().eventos(),
+          stream: FirebaseFirestore.instance
+              .collection('eventos')
+              .where('estado', isEqualTo: 'Pendiente')
+              .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return CircularProgressIndicator();

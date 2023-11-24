@@ -110,22 +110,24 @@ class _eventos_widgetState extends State<eventos_widget> {
                                         context: context,
                                         builder: (BuildContext context) {
                                           return AlertDialog(
-                                            title: Text('¿Esta seguro de eliminar el evento?'),
+                                            title: Text(
+                                                '¿Esta seguro de eliminar el evento?'),
                                             actions: [
                                               TextButton(
-                                                onPressed: () async{
-                                                  await FirestoreService().eventoBorrar(widget.id);
-                                                  Navigator.pop(context);
-                                                },
-                                                child: Text('Aceptar')
-                                              ),
+                                                  onPressed: () async {
+                                                    await FirestoreService()
+                                                        .eventoBorrar(
+                                                            widget.id);
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text('Aceptar')),
                                               TextButton(
                                                 onPressed: () {
-                                                  Navigator.pop(context); // Cerrar la alerta
+                                                  Navigator.pop(
+                                                      context); // Cerrar la alerta
                                                 },
                                                 child: Text('Cancelar'),
                                               ),
-                                              
                                             ],
                                           );
                                         },
@@ -149,24 +151,8 @@ class _eventos_widgetState extends State<eventos_widget> {
                                       showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
-                                          return AlertDialog(
-                                            title: Text('¿Esta seguro de eliminar el evento?'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () {
-                                                  FirestoreService().actualizarEstado(id, estado);
-                                                  Navigator.pop(context);
-                                                },
-                                                child: Text('Aceptar')
-                                              ),
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.pop(context); // Cerrar la alerta
-                                                },
-                                                child: Text('Cancelar'),
-                                              ),
-                                              
-                                            ],
+                                          return Column(
+                                            children: [Text('hola')],
                                           );
                                         },
                                       );
