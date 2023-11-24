@@ -199,6 +199,7 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
                                     0,
                                     imageUrl,
                                   );
+                                  Navigator.pop(context);
                                 } else {
                                   showDialog(
                                     context: context,
@@ -241,8 +242,7 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
                             final XFile? imagen =
                                 await getImage(); //Esta wea esta hecha como el pico XJDSFUSFKO´Ñ
                             setState(() {
-                              if (imagen == null) {
-                                print('tonto');
+                              if (imagen == null) {;
                               } else {
                                 imageSubir = File(imagen.path);
                               }

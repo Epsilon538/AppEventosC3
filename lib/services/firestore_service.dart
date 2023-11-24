@@ -41,4 +41,10 @@ class FirestoreService {
       });
   }
 
+  void actualizarEstado(String id, String estado) async {
+      DocumentReference documentReference = FirebaseFirestore.instance.collection('eventos').doc(id);
+      await documentReference.update({
+        'estado' : estado,
+      });
+  }
 }

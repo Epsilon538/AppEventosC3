@@ -130,8 +130,6 @@ class _eventos_widgetState extends State<eventos_widget> {
                                           );
                                         },
                                       );
-                                      
-
                                     });
                               } else {
                                 return Container();
@@ -148,8 +146,30 @@ class _eventos_widgetState extends State<eventos_widget> {
                                 return IconButton(
                                     icon: Icon(MdiIcons.cog),
                                     onPressed: () async {
-                                      await FirestoreService()
-                                          .eventoBorrar(widget.id);
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text('¿Esta seguro de eliminar el evento?'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () {
+                                                  FirestoreService().actualizarEstado(id, estado);
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text('Aceptar')
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context); // Cerrar la alerta
+                                                },
+                                                child: Text('Cancelar'),
+                                              ),
+                                              
+                                            ],
+                                          );
+                                        },
+                                      );
                                     });
                               } else {
                                 return Container();
