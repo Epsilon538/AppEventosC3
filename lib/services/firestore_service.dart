@@ -18,8 +18,8 @@ class FirestoreService {
     });
   }
 
-  Future<void> eventoBorrar(String docId) async {
-    return FirebaseFirestore.instance.collection('eventos').doc(docId).delete();
+  Future<void> eventoBorrar(String id) async {
+    return FirebaseFirestore.instance.collection('eventos').doc(id).delete();
   }
 
   Future<QuerySnapshot> getEventos() async {
