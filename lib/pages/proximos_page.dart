@@ -42,7 +42,8 @@ class _ProximosPageState extends State<ProximosPage> {
                         tipo: evento.tipo,
                         estado: evento.estado,
                         likes: evento.likes,
-                        imageUrl: evento.imagen);
+                        imageUrl: evento.imagen,
+                        id: evento.id);
                 },
               );
             }

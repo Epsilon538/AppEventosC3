@@ -32,7 +32,6 @@ class _EventosPageState extends State<EventosPage> {
                 itemBuilder: (context, index) {
                   Evento evento =
                       Evento.fromSnapshot(snapshot.data!.docs[index]);
-                  print(evento.imagen);
                   return eventos_widget(
                       nombre: evento.nombre,
                       fechaHora: evento.fechaHora,
@@ -41,7 +40,8 @@ class _EventosPageState extends State<EventosPage> {
                       tipo: evento.tipo,
                       estado: evento.estado,
                       likes: evento.likes,
-                      imageUrl: evento.imagen);
+                      imageUrl: evento.imagen,
+                      id: evento.id);
                 },
               );
             }

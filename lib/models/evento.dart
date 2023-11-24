@@ -7,6 +7,7 @@ class Evento {
   String _estado;
   int _likes;
   String _imagen;
+  String _id;
 
   Evento(
       {nombre = '',
@@ -15,7 +16,8 @@ class Evento {
       tipo = '',
       estado = '',
       like = 0,
-      img = ''})
+      img = '',
+      id = ''})
       : _nombre = nombre,
         _lugar = lugar,
         _desc = desc,
@@ -23,7 +25,8 @@ class Evento {
         _estado = estado,
         _likes = like,
         _imagen = img,
-        _fechaHora = DateTime.now();
+        _fechaHora = DateTime.now(),
+        _id = id;
 
   Evento.fromSnapshot(dynamic snapshot)
       : _nombre = snapshot['nombre'],
@@ -33,7 +36,8 @@ class Evento {
         _estado = snapshot['estado'],
         _likes = snapshot['likes'],
         _imagen = snapshot['imagen'],
-        _fechaHora = snapshot['fechaHora'].toDate();
+        _fechaHora = snapshot['fechaHora'].toDate(),
+        _id = snapshot.id;
 
   String get nombre => this._nombre;
   DateTime get fechaHora => this._fechaHora;
@@ -43,4 +47,5 @@ class Evento {
   String get estado => this._estado;
   int get likes => this._likes;
   String get imagen => this._imagen;
+  String get id => this._id;
 }
