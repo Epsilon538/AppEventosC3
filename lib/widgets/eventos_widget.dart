@@ -106,8 +106,32 @@ class _eventos_widgetState extends State<eventos_widget> {
                                 return IconButton(
                                     icon: Icon(MdiIcons.trashCan),
                                     onPressed: () async {
-                                      await FirestoreService()
-                                          .eventoBorrar(widget.id);
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return AlertDialog(
+                                            title: Text('¿Esta seguro de eliminar el evento?'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () async{
+                                                  await FirestoreService().eventoBorrar(widget.id);
+                                                  Navigator.pop(context);
+                                                },
+                                                child: Text('Aceptar')
+                                              ),
+                                              TextButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context); // Cerrar la alerta
+                                                },
+                                                child: Text('Cancelar'),
+                                              ),
+                                              
+                                            ],
+                                          );
+                                        },
+                                      );
+                                      
+
                                     });
                               } else {
                                 return Container();
