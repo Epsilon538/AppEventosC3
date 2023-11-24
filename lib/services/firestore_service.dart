@@ -5,16 +5,24 @@ class FirestoreService {
     return FirebaseFirestore.instance.collection('eventos').snapshots();
   }
 
-  Future<void> eventoAgregar(String nombre, DateTime fechaHora, String lugar, String descripcion, String tipo, String estado, int likes, String imagen) async {
+  Future<void> eventoAgregar(
+      String nombre,
+      DateTime fechaHora,
+      String lugar,
+      String descripcion,
+      String tipo,
+      String estado,
+      int likes,
+      String imagen) async {
     return FirebaseFirestore.instance.collection('eventos').doc().set({
       'nombre': nombre,
-      'fechaHora' : fechaHora,
-      'lugar' : lugar,
-      'descripcion' : descripcion,
-      'tipo' : tipo,
-      'estado' : estado,
-      'likes' : likes,
-      'imagen' : imagen
+      'fechaHora': fechaHora,
+      'lugar': lugar,
+      'descripcion': descripcion,
+      'tipo': tipo,
+      'estado': estado,
+      'likes': likes,
+      'imagen': imagen
     });
   }
 
