@@ -20,11 +20,21 @@ class _HomePageState extends State<HomePage> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.add),
-            onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AgregarEventoPage()));
+        floatingActionButton: StreamBuilder(
+            stream: AuthService().usuario,
+            builder: (context, snapshot) {
+              if (FirebaseAuth.instance.currentUser?.displayName != null) {
+                return FloatingActionButton(
+                    child: Icon(Icons.add),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AgregarEventoPage()));
+                    });
+              } else {
+                return Text('Grupaso Corp™');
+              }
             }),
         appBar: AppBar(
           actions: [

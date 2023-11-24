@@ -25,7 +25,8 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
 
   String formatTimeOfDay(TimeOfDay time) {
     final now = DateTime.now();
-    final dateTime = DateTime(now.year, now.month, now.day, time.hour, time.minute);
+    final dateTime =
+        DateTime(now.year, now.month, now.day, time.hour, time.minute);
     final formatter = DateFormat.jm();
     return formatter.format(dateTime);
   }
@@ -167,9 +168,6 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
                       children: [
                         Container(
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    Color.fromARGB(255, 45, 184, 27)),
                             onPressed: () async {
                               if (formKey.currentState!.validate()) {
                                 if (imageSubir != null) {
