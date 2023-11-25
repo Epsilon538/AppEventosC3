@@ -50,6 +50,7 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
 
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.lightGreen.shade200,
           title: Text('Agregar eventos'),
         ),
         body: SingleChildScrollView(
@@ -242,7 +243,8 @@ class _AgregarEventoPageState extends State<AgregarEventoPage> {
                             final XFile? imagen =
                                 await getImage(); //Esta wea esta hecha como el pico XJDSFUSFKO´Ñ
                             setState(() {
-                              if (imagen == null) {;
+                              if (imagen == null) {
+                                ;
                               } else {
                                 imageSubir = File(imagen.path);
                               }

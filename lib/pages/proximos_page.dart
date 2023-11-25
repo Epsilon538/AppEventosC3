@@ -44,7 +44,6 @@ class _ProximosPageState extends State<ProximosPage> {
                 },
               );
             }
-
             return Text('No hay datos disponibles');
           },
         ),
