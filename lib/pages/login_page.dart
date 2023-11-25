@@ -1,3 +1,4 @@
+import 'package:app_eventos/services/auth_service.dart';
 import 'package:app_eventos/services/google-sign-in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class _LoginPageState extends State<LoginPage> {
                     //Image(image: NetworkImage(FirebaseAuth.instance.currentUser?.photoURL.toString()) ?? Image.asset('assets/images/user_default.png')),   
                   ),
                 ),
-                Text(FirebaseAuth.instance.currentUser?.displayName != null ? 'Logued as ${FirebaseAuth.instance.currentUser?.displayName ?? 'Unknown'}': 'Not logued', style: TextStyle(fontSize: 15)),                   
+                Text(FirebaseAuth.instance.currentUser?.displayName != null ? 'Logged as ${FirebaseAuth.instance.currentUser?.displayName ?? 'Unknown'}': 'Not logued', style: TextStyle(fontSize: 15)),                   
                 SizedBox(height: 100),
                 Text('Iniciar Sesion'),
                 IconButton(
@@ -48,7 +49,29 @@ class _LoginPageState extends State<LoginPage> {
                     });
                   },
                 ),
-
+                StreamBuilder(
+                  stream: AuthService().usuario, 
+                  builder: (BuildContext context, AsyncSnapshot snapshot) {
+                    if(FirebaseAuth.instance.currentUser?.displayName != null){
+                      return Column(
+                        children: [
+                          Text('Cerrar Sesion'),
+                          IconButton(
+                            icon: Icon(MdiIcons.logout),
+                            onPressed: () async {
+                              FirebaseAuth.instance.signOut();
+                              setState(() {
+                                
+                              });
+                            },
+                          ),
+                        ],
+                      );
+                    } else {
+                      return Container();
+                    }
+                  }
+                )
               ],
             ),
           ],
