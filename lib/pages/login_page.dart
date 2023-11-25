@@ -2,6 +2,7 @@ import 'package:app_eventos/services/auth_service.dart';
 import 'package:app_eventos/services/google-sign-in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class LoginPage extends StatefulWidget {
@@ -41,7 +42,6 @@ class _LoginPageState extends State<LoginPage> {
                             : Image.asset(
                                 'assets/images/user_default.png',
                               ),
-                    //Image(image: NetworkImage(FirebaseAuth.instance.currentUser?.photoURL.toString()) ?? Image.asset('assets/images/user_default.png')),
                   ),
                 ),
                 Text(
@@ -54,8 +54,23 @@ class _LoginPageState extends State<LoginPage> {
                 IconButton(
                   icon: Icon(MdiIcons.google),
                   onPressed: () async {
-                    await iniciarSesionConGoogle();
-                    setState(() {});
+                    try{
+                      await iniciarSesionConGoogle();
+                      setState(() {});
+                    }on PlatformException catch(e){
+                      return showDialog(
+                        context: context, 
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Error inesperado'),
+                            actions: [
+                              TextButton(onPressed: (){Navigator.pop(context);}, child: Text('Aceptar'))
+                            ],
+                          );
+                        }
+                      );
+                    }
+                    
                   },
                 ),
                 StreamBuilder(
