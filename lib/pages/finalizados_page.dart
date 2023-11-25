@@ -32,6 +32,7 @@ class FinalizadosPage extends StatelessWidget {
                       Evento.fromSnapshot(snapshot.data!.docs[index]);
                   return eventos_widget(
                     evento: evento,
+                    destacado: false,
                   );
                 },
               );

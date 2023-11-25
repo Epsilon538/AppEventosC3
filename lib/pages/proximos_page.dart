@@ -39,6 +39,7 @@ class _ProximosPageState extends State<ProximosPage> {
                       .isBefore(DateTime.now().add(Duration(days: 3))))
                     return eventos_widget(
                       evento: evento,
+                      destacado: true,
                     );
                 },
               );

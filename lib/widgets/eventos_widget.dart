@@ -9,8 +9,10 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 class eventos_widget extends StatefulWidget {
   const eventos_widget({
     required this.evento,
+    required this.destacado,
   });
 
+  final bool destacado;
   final Evento evento;
 
   @override
@@ -23,6 +25,8 @@ class _eventos_widgetState extends State<eventos_widget> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color:
+          widget.destacado ? Colors.orange.shade100 : Colors.lightGreen.shade50,
       elevation: 4,
       margin: EdgeInsets.all(15),
       child: Padding(

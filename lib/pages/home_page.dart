@@ -72,7 +72,8 @@ class _HomePageState extends State<HomePage> {
                   }
                 })
           ],
-          title: Text('Eventasos'),
+          leading: Icon(Icons.calendar_month_outlined),
+          title: Text('Eventasos™'),
           bottom: TabBar(tabs: [
             Tab(
               text: 'Proximos',
