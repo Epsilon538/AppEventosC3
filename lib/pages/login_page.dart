@@ -15,7 +15,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.lightGreen.shade200,
+        title: Text('Iniciar sesión'),
+      ),
       body: Container(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -27,51 +30,54 @@ class _LoginPageState extends State<LoginPage> {
                   width: 150,
                   height: 150,
                   child: Center(
-                    child: FirebaseAuth.instance.currentUser?.photoURL != null && FirebaseAuth.instance.currentUser!.photoURL!.isNotEmpty
+                    child:
+                        FirebaseAuth.instance.currentUser?.photoURL != null &&
+                                FirebaseAuth
+                                    .instance.currentUser!.photoURL!.isNotEmpty
                             ? Image.network(
                                 FirebaseAuth.instance.currentUser!.photoURL!,
                               )
                             : Image.asset(
                                 'assets/images/user_default.png',
                               ),
-                    //Image(image: NetworkImage(FirebaseAuth.instance.currentUser?.photoURL.toString()) ?? Image.asset('assets/images/user_default.png')),   
+                    //Image(image: NetworkImage(FirebaseAuth.instance.currentUser?.photoURL.toString()) ?? Image.asset('assets/images/user_default.png')),
                   ),
                 ),
-                Text(FirebaseAuth.instance.currentUser?.displayName != null ? 'Logged as ${FirebaseAuth.instance.currentUser?.displayName ?? 'Unknown'}': 'Not logued', style: TextStyle(fontSize: 15)),                   
+                Text(
+                    FirebaseAuth.instance.currentUser?.displayName != null
+                        ? 'Logged as ${FirebaseAuth.instance.currentUser?.displayName ?? 'Unknown'}'
+                        : 'Not logged',
+                    style: TextStyle(fontSize: 15)),
                 SizedBox(height: 100),
                 Text('Iniciar Sesion'),
                 IconButton(
                   icon: Icon(MdiIcons.google),
                   onPressed: () async {
                     await iniciarSesionConGoogle();
-                    setState(() {
-                      
-                    });
+                    setState(() {});
                   },
                 ),
                 StreamBuilder(
-                  stream: AuthService().usuario, 
-                  builder: (BuildContext context, AsyncSnapshot snapshot) {
-                    if(FirebaseAuth.instance.currentUser?.displayName != null){
-                      return Column(
-                        children: [
-                          Text('Cerrar Sesion'),
-                          IconButton(
-                            icon: Icon(MdiIcons.logout),
-                            onPressed: () async {
-                              FirebaseAuth.instance.signOut();
-                              setState(() {
-                                
-                              });
-                            },
-                          ),
-                        ],
-                      );
-                    } else {
-                      return Container();
-                    }
-                  }
-                )
+                    stream: AuthService().usuario,
+                    builder: (BuildContext context, AsyncSnapshot snapshot) {
+                      if (FirebaseAuth.instance.currentUser?.displayName !=
+                          null) {
+                        return Column(
+                          children: [
+                            Text('Cerrar Sesion'),
+                            IconButton(
+                              icon: Icon(MdiIcons.logout),
+                              onPressed: () async {
+                                FirebaseAuth.instance.signOut();
+                                setState(() {});
+                              },
+                            ),
+                          ],
+                        );
+                      } else {
+                        return Container();
+                      }
+                    })
               ],
             ),
           ],
