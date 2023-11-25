@@ -35,16 +35,16 @@ class FirestoreService {
   }
 
   void actualizarLike(String id, int like) async {
-      DocumentReference documentReference = FirebaseFirestore.instance.collection('eventos').doc(id);
-      await documentReference.update({
-        'likes' : like
-      });
+    DocumentReference documentReference =
+        FirebaseFirestore.instance.collection('eventos').doc(id);
+    await documentReference.update({'likes': like});
   }
 
-  void actualizarEstado(String id, String estado) async {
-      DocumentReference documentReference = FirebaseFirestore.instance.collection('eventos').doc(id);
-      await documentReference.update({
-        'estado' : estado,
-      });
+  Future<void> actualizarEstado(String id, String estado) async {
+    DocumentReference documentReference =
+        FirebaseFirestore.instance.collection('eventos').doc(id);
+    await documentReference.update({
+      'estado': estado,
+    });
   }
 }

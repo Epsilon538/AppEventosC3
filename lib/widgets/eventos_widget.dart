@@ -99,24 +99,32 @@ class _eventos_widgetState extends State<eventos_widget> {
                                         context: context,
                                         builder: (BuildContext context) {
                                           return AlertDialog(
-                                            title: Text(
-                                                '¿Esta seguro de eliminar el evento?'),
+                                            title: Text('¿Esta seguro?'),
+                                            content: Text(
+                                                'Evento a eliminar: ${widget.evento.nombre}'),
                                             actions: [
-                                              TextButton(
-                                                  onPressed: () async {
-                                                    await FirestoreService()
-                                                        .eventoBorrar(
-                                                            widget.evento.id);
-                                                    Navigator.pop(context);
-                                                  },
-                                                  child: Text('Aceptar')),
-                                              TextButton(
-                                                onPressed: () {
-                                                  Navigator.pop(
-                                                      context); // Cerrar la alerta
-                                                },
-                                                child: Text('Cancelar'),
-                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  TextButton(
+                                                      onPressed: () async {
+                                                        await FirestoreService()
+                                                            .eventoBorrar(widget
+                                                                .evento.id);
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: Text('Aceptar')),
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(
+                                                          context); // Cerrar la alerta
+                                                    },
+                                                    child: Text('Cancelar'),
+                                                  ),
+                                                ],
+                                              )
                                             ],
                                           );
                                         },
@@ -141,7 +149,46 @@ class _eventos_widgetState extends State<eventos_widget> {
                                         context: context,
                                         builder: (BuildContext context) {
                                           return AlertDialog(
-                                            actions: [],
+                                            title: Text('Cambiar estado'),
+                                            content: Text(
+                                                'Evento: ${widget.evento.nombre}'),
+                                            actions: [
+                                              Row(
+                                                children: [
+                                                  TextButton(
+                                                      onPressed: () async {
+                                                        await FirestoreService()
+                                                            .actualizarEstado(
+                                                                widget
+                                                                    .evento.id,
+                                                                'Finalizado');
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child:
+                                                          Text('Finalizado')),
+                                                  TextButton(
+                                                      onPressed: () async {
+                                                        await FirestoreService()
+                                                            .actualizarEstado(
+                                                                widget
+                                                                    .evento.id,
+                                                                'Cancelado');
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: Text('Cancelado')),
+                                                  TextButton(
+                                                      onPressed: () async {
+                                                        await FirestoreService()
+                                                            .actualizarEstado(
+                                                                widget
+                                                                    .evento.id,
+                                                                'Pendiente');
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: Text('Pendiente')),
+                                                ],
+                                              )
+                                            ],
                                           );
                                         },
                                       );
