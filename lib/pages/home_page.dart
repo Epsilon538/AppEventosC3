@@ -46,12 +46,15 @@ class _HomePageState extends State<HomePage> {
                     return PopupMenuButton(
                       itemBuilder: (context) => [
                         PopupMenuItem(
-                          child: Text('Cerrar sesión'),
-                          value: 'cerrar',
+                          child: Text('Cuenta'),
+                          value: 'cuenta',
                         )
                       ],
                       onSelected: (value) {
-                        FirebaseAuth.instance.signOut();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()));
                       },
                     );
                   } else {

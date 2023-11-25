@@ -140,8 +140,8 @@ class _eventos_widgetState extends State<eventos_widget> {
                                       showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
-                                          return Column(
-                                            children: [Text('hola')],
+                                          return AlertDialog(
+                                            actions: [],
                                           );
                                         },
                                       );
