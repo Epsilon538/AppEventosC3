@@ -96,6 +96,7 @@ class _eventos_widgetState extends State<eventos_widget> {
                                     icon: Icon(MdiIcons.trashCan),
                                     onPressed: () async {
                                       showDialog(
+                                        barrierDismissible: false,
                                         context: context,
                                         builder: (BuildContext context) {
                                           return AlertDialog(
@@ -146,10 +147,23 @@ class _eventos_widgetState extends State<eventos_widget> {
                                     icon: Icon(MdiIcons.cog),
                                     onPressed: () async {
                                       showDialog(
+                                        barrierDismissible: false,
                                         context: context,
                                         builder: (BuildContext context) {
                                           return AlertDialog(
-                                            title: Text('Cambiar estado'),
+                                            title: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text('Cambiar estado'),
+                                                IconButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    icon: Icon(Icons.close))
+                                              ],
+                                            ),
                                             content: Text(
                                                 'Evento: ${widget.evento.nombre}'),
                                             actions: [

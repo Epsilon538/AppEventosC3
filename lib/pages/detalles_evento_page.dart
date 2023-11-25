@@ -11,10 +11,14 @@ class detallesEvento extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          backgroundColor: Colors.lightGreen.shade200,
+          title: Text('Detalles'),
+        ),
         body: Card(
           child: StreamBuilder<DocumentSnapshot>(
-            stream: FirestoreService().eventoUnico(id),
+            stream: FirestoreService()
+                .eventoUnico(id), //ESTO SE PODIA HABER HECHO PASANDO EL OBJETO
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 print(id);
