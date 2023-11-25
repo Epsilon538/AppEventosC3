@@ -25,13 +25,21 @@ class _LoginPageState extends State<LoginPage> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
+                  width: 150,
+                  height: 150,
                   child: Center(
-                    child: Image(image: NetworkImage(FirebaseAuth.instance.currentUser?.photoURL.toString() ?? '')),   
+                    child: FirebaseAuth.instance.currentUser?.photoURL != null && FirebaseAuth.instance.currentUser!.photoURL!.isNotEmpty
+                            ? Image.network(
+                                FirebaseAuth.instance.currentUser!.photoURL!,
+                              )
+                            : Image.asset(
+                                'assets/images/user_default.png',
+                              ),
+                    //Image(image: NetworkImage(FirebaseAuth.instance.currentUser?.photoURL.toString()) ?? Image.asset('assets/images/user_default.png')),   
                   ),
                 ),
-                SizedBox(height: 20),
                 Text(FirebaseAuth.instance.currentUser?.displayName != null ? 'Logued as ${FirebaseAuth.instance.currentUser?.displayName ?? 'Unknown'}': 'Not logued', style: TextStyle(fontSize: 15)),                   
-                SizedBox(height: 20),
+                SizedBox(height: 100),
                 Text('Iniciar Sesion'),
                 IconButton(
                   icon: Icon(MdiIcons.google),
@@ -42,6 +50,7 @@ class _LoginPageState extends State<LoginPage> {
                     });
                   },
                 ),
+                
               ],
             ),
           ],
