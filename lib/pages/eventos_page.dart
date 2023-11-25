@@ -35,16 +35,18 @@ class _EventosPageState extends State<EventosPage> {
                 itemBuilder: (context, index) {
                   Evento evento =
                       Evento.fromSnapshot(snapshot.data!.docs[index]);
-                  return eventos_widget(
-                      nombre: evento.nombre,
-                      fechaHora: evento.fechaHora,
-                      lugar: evento.lugar,
-                      descripcion: evento.desc,
-                      tipo: evento.tipo,
-                      estado: evento.estado,
-                      likes: evento.likes,
-                      imageUrl: evento.imagen,
-                      id: evento.id);
+                  if (evento.fechaHora
+                      .isBefore(DateTime.now().add(Duration(days: 3)))) {
+                    return eventos_widget(
+                      evento: evento,
+                      destacado: true,
+                    );
+                  } else {
+                    return eventos_widget(
+                      evento: evento,
+                      destacado: false,
+                    );
+                  }
                 },
               );
             }

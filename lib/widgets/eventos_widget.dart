@@ -1,3 +1,4 @@
+import 'package:app_eventos/models/evento.dart';
 import 'package:app_eventos/pages/detalles_evento_page.dart';
 import 'package:app_eventos/services/auth_service.dart';
 import 'package:app_eventos/services/firestore_service.dart';
@@ -7,26 +8,12 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 class eventos_widget extends StatefulWidget {
   const eventos_widget({
-    required this.nombre,
-    required this.fechaHora,
-    required this.lugar,
-    required this.descripcion,
-    required this.tipo,
-    required this.estado,
-    required this.likes,
-    required this.imageUrl,
-    required this.id,
+    required this.evento,
+    required this.destacado,
   });
 
-  final String nombre;
-  final DateTime fechaHora;
-  final String lugar;
-  final String descripcion;
-  final String tipo;
-  final String estado;
-  final int likes;
-  final String imageUrl;
-  final String id;
+  final bool destacado;
+  final Evento evento;
 
   @override
   State<eventos_widget> createState() => _eventos_widgetState();
@@ -38,6 +25,8 @@ class _eventos_widgetState extends State<eventos_widget> {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color:
+          widget.destacado ? Colors.orange.shade100 : Colors.lightGreen.shade50,
       elevation: 4,
       margin: EdgeInsets.all(15),
       child: Padding(
@@ -53,34 +42,34 @@ class _eventos_widgetState extends State<eventos_widget> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.nombre,
+                        widget.evento.nombre,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
                       ),
                       Text(
-                          'Fecha: ${widget.fechaHora.day}/${widget.fechaHora.month}/${widget.fechaHora.year}'),
+                          'Fecha: ${widget.evento.fechaHora.day}/${widget.evento.fechaHora.month}/${widget.evento.fechaHora.year}'),
                       Text(
-                          'Hora: ${widget.fechaHora.hour.toString().padLeft(2, '0')}:${widget.fechaHora.minute.toString().padLeft(2, '0')}'),
-                      Text('Lugar: ${widget.lugar}'),
-                      Text('Estado: ${widget.estado}'),
-                      Text('Me gusta: ${widget.likes}'),
+                          'Hora: ${widget.evento.fechaHora.hour.toString().padLeft(2, '0')}:${widget.evento.fechaHora.minute.toString().padLeft(2, '0')}'),
+                      Text('Lugar: ${widget.evento.lugar}'),
+                      Text('Estado: ${widget.evento.estado}'),
+                      Text('Me gusta: ${widget.evento.likes}'),
                       Row(
                         children: [
                           IconButton(
                             icon: Icon(Icons.thumb_up, color: colorLike),
                             onPressed: () {
                               if (estadoLike == true) {
-                                int nuevoLike = widget.likes + 1;
-                                FirestoreService()
-                                    .actualizarLike(widget.id, nuevoLike);
+                                int nuevoLike = widget.evento.likes + 1;
+                                FirestoreService().actualizarLike(
+                                    widget.evento.id, nuevoLike);
                                 estadoLike = false;
                                 colorLike = Colors.lightGreen;
                               } else {
-                                int nuevoLike = widget.likes - 1;
-                                FirestoreService()
-                                    .actualizarLike(widget.id, nuevoLike);
+                                int nuevoLike = widget.evento.likes - 1;
+                                FirestoreService().actualizarLike(
+                                    widget.evento.id, nuevoLike);
                                 estadoLike = true;
                                 colorLike = Colors.black87;
                               }
@@ -92,8 +81,8 @@ class _eventos_widgetState extends State<eventos_widget> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          detallesEvento(id: widget.id)));
+                                      builder: (context) => detallesEvento(
+                                          id: widget.evento.id)));
                             },
                           ),
                           StreamBuilder(
@@ -117,7 +106,7 @@ class _eventos_widgetState extends State<eventos_widget> {
                                                   onPressed: () async {
                                                     await FirestoreService()
                                                         .eventoBorrar(
-                                                            widget.id);
+                                                            widget.evento.id);
                                                     Navigator.pop(context);
                                                   },
                                                   child: Text('Aceptar')),
@@ -178,7 +167,7 @@ class _eventos_widgetState extends State<eventos_widget> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image(
-                      image: NetworkImage('${widget.imageUrl}'),
+                      image: NetworkImage('${widget.evento.imagen}'),
                       fit: BoxFit.cover),
                 ),
               ),
